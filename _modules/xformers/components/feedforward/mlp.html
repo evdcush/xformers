@@ -12,7 +12,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>xformers.components.feedforward.mlp | xFormers 0.0.1 documentation</title>
+  <title>xformers.components.feedforward.mlp | xFormers 0.0.23 documentation</title>
   
   <script src="../../../../_static/js/ga.js"></script>
   <script src="../../../../_static/js/redirect.js"></script>
@@ -22,7 +22,7 @@
   
   <link rel="canonical" href="https://facebookresearch.github.io/xformers_modules/xformers/components/feedforward/mlp.html" />
   
-  <meta property="og:title" content="xformers.components.feedforward.mlp | xFormers 0.0.1 documentation">
+  <meta property="og:title" content="xformers.components.feedforward.mlp | xFormers 0.0.23 documentation">
   <meta name="description" content="API docs for xFormers. xFormers is a PyTorch extension library for composable and optimized Transformer blocks.">
   <meta property="og:description" content="API docs for xFormers. xFormers is a PyTorch extension library for composable and optimized Transformer blocks.">
   <!--<meta property="og:image" content="https://mmf.sh/img/logo.png">-->
@@ -133,23 +133,19 @@
         
         
         
-        <p><span class="caption-text">Index</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Index</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../what_is_xformers.html">What is xFormers?</a></li>
 </ul>
-<p><span class="caption-text">Components Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Components Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">API Reference</a></li>
 </ul>
-<p><span class="caption-text">Build models and blocks programatically</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../factory/index.html">Factory</a></li>
-</ul>
-<p><span class="caption-text">Tutorials and examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
 </ul>
-<p><span class="caption-text">Some custom parts</span></p>
+<p class="caption" role="heading"><span class="caption-text">Some custom parts</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../custom_parts/index.html">Custom parts reference</a></li>
 </ul>
@@ -245,6 +241,7 @@
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">MlpConfig</span><span class="p">(</span><span class="n">FeedforwardConfig</span><span class="p">):</span>
     <span class="n">hidden_layer_multiplier</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">bias</span><span class="p">:</span> <span class="nb">bool</span>
 
 
 <div class="viewcode-block" id="MLP"><a class="viewcode-back" href="../../../../components/feedforward.html#xformers.components.feedforward.MLP">[docs]</a><span class="nd">@register_feedforward</span><span class="p">(</span><span class="s2">&quot;MLP&quot;</span><span class="p">,</span> <span class="n">MlpConfig</span><span class="p">)</span>
@@ -255,16 +252,17 @@
         <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">activation</span><span class="p">:</span> <span class="n">Activation</span><span class="p">,</span>
         <span class="n">hidden_layer_multiplier</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-
+        <span class="n">dim_mlp</span> <span class="o">=</span> <span class="n">hidden_layer_multiplier</span> <span class="o">*</span> <span class="n">dim_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">dim_model</span><span class="p">,</span> <span class="n">hidden_layer_multiplier</span> <span class="o">*</span> <span class="n">dim_model</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">dim_model</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">dim_mlp</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">),</span>
             <span class="n">build_activation</span><span class="p">(</span><span class="n">activation</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_layer_multiplier</span> <span class="o">*</span> <span class="n">dim_model</span><span class="p">,</span> <span class="n">dim_model</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">dim_mlp</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">dim_model</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">),</span>
         <span class="p">)</span>
 
@@ -286,7 +284,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Facebook AI Research.
+        &copy; Copyright Copyright © 2021 Meta Platforms, Inc.
 
     </p>
   </div>
@@ -319,10 +317,11 @@
   
   <script type="text/javascript" id="documentation_options" data-url_root="../../../../"
     src="../../../../_static/documentation_options.js"></script>
+  <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
   <script src="../../../../_static/jquery.js"></script>
   <script src="../../../../_static/underscore.js"></script>
+  <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
   <script src="../../../../_static/doctools.js"></script>
-  <script src="../../../../_static/language_data.js"></script>
   
 
   
@@ -360,6 +359,8 @@
             <li class="list-title"><a href="">Resources</a></li>
             <li><a href="https://github.com/facebookresearch/xformers">Docs</a></li>
             <li><a href="https://github.com/facebookresearch/xformers/issues" target="_blank">Github Issues</a></li>
+            <li><a href="https://opensource.facebook.com/legal/terms">Terms of Use</a></li>
+            <li><a href="https://opensource.facebook.com/legal/privacy">Privacy Policy</a></li>
           </ul>
         </div>
       </div>

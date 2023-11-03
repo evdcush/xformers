@@ -13,7 +13,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorials | xFormers 0.0.1 documentation</title>
+  <title>Tutorials | xFormers 0.0.23 documentation</title>
   
   <script src="../_static/js/ga.js"></script>
   <script src="../_static/js/redirect.js"></script>
@@ -23,7 +23,7 @@
   
   <link rel="canonical" href="https://facebookresearch.github.io/xformerstutorials/index.html" />
   
-  <meta property="og:title" content="Tutorials | xFormers 0.0.1 documentation">
+  <meta property="og:title" content="Tutorials | xFormers 0.0.23 documentation">
   <meta name="description" content="API docs for xFormers. xFormers is a PyTorch extension library for composable and optimized Transformer blocks.">
   <meta property="og:description" content="API docs for xFormers. xFormers is a PyTorch extension library for composable and optimized Transformer blocks.">
   <!--<meta property="og:image" content="https://mmf.sh/img/logo.png">-->
@@ -44,7 +44,7 @@
   <link rel="index" title="Index" href="../genindex.html" />
   <link rel="search" title="Search" href="../search.html" />
   <link rel="next" title="Replace all attentions from an existing ViT model with a sparse equivalent?" href="sparse_vit.html" />
-  <link rel="prev" title="Model factory" href="../factory/model.html" /> 
+  <link rel="prev" title="Multi Head Attention" href="../components/mha.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -136,23 +136,19 @@
         
         
         
-        <p><span class="caption-text">Index</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Index</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../what_is_xformers.html">What is xFormers?</a></li>
 </ul>
-<p><span class="caption-text">Components Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Components Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../components/index.html">API Reference</a></li>
 </ul>
-<p><span class="caption-text">Build models and blocks programatically</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../factory/index.html">Factory</a></li>
-</ul>
-<p><span class="caption-text">Tutorials and examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and examples</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a></li>
 </ul>
-<p><span class="caption-text">Some custom parts</span></p>
+<p class="caption" role="heading"><span class="caption-text">Some custom parts</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../custom_parts/index.html">Custom parts reference</a></li>
 </ul>
@@ -228,15 +224,13 @@
               <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
                 
   <section id="tutorials">
-<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="sparse_vit.html">Replace all attentions from an existing ViT model with a sparse equivalent?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blocksparse.html">Using BlockSparseAttention</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extend_attentions.html">Extend the xFormers parts zoo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="use_attention.html">I’m only interested in testing out the attention mechanisms that are hosted here</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pytorch_encoder.html">Building an encoder, comparing to PyTorch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pytorch_encoder.html#building-full-models">Building full models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reversible.html">Using the Reversible block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="triton.html">Using Triton-based layers</a></li>
 </ul>
@@ -254,7 +248,7 @@
         <a href="sparse_vit.html" class="btn btn-neutral float-right" title="Replace all attentions from an existing ViT model with a sparse equivalent?" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="../factory/model.html" class="btn btn-neutral" title="Model factory" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="../components/mha.html" class="btn btn-neutral" title="Multi Head Attention" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -267,7 +261,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Facebook AI Research.
+        &copy; Copyright Copyright © 2021 Meta Platforms, Inc.
 
     </p>
   </div>
@@ -303,10 +297,11 @@
   
   <script type="text/javascript" id="documentation_options" data-url_root="../"
     src="../_static/documentation_options.js"></script>
+  <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
   <script src="../_static/jquery.js"></script>
   <script src="../_static/underscore.js"></script>
+  <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
   <script src="../_static/doctools.js"></script>
-  <script src="../_static/language_data.js"></script>
   
 
   
@@ -344,6 +339,8 @@
             <li class="list-title"><a href="">Resources</a></li>
             <li><a href="https://github.com/facebookresearch/xformers">Docs</a></li>
             <li><a href="https://github.com/facebookresearch/xformers/issues" target="_blank">Github Issues</a></li>
+            <li><a href="https://opensource.facebook.com/legal/terms">Terms of Use</a></li>
+            <li><a href="https://opensource.facebook.com/legal/privacy">Privacy Policy</a></li>
           </ul>
         </div>
       </div>

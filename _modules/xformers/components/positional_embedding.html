@@ -12,7 +12,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>xformers.components.positional_embedding | xFormers 0.0.1 documentation</title>
+  <title>xformers.components.positional_embedding | xFormers 0.0.23 documentation</title>
   
   <script src="../../../_static/js/ga.js"></script>
   <script src="../../../_static/js/redirect.js"></script>
@@ -22,7 +22,7 @@
   
   <link rel="canonical" href="https://facebookresearch.github.io/xformers_modules/xformers/components/positional_embedding.html" />
   
-  <meta property="og:title" content="xformers.components.positional_embedding | xFormers 0.0.1 documentation">
+  <meta property="og:title" content="xformers.components.positional_embedding | xFormers 0.0.23 documentation">
   <meta name="description" content="API docs for xFormers. xFormers is a PyTorch extension library for composable and optimized Transformer blocks.">
   <meta property="og:description" content="API docs for xFormers. xFormers is a PyTorch extension library for composable and optimized Transformer blocks.">
   <!--<meta property="og:image" content="https://mmf.sh/img/logo.png">-->
@@ -133,23 +133,19 @@
         
         
         
-        <p><span class="caption-text">Index</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Index</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../what_is_xformers.html">What is xFormers?</a></li>
 </ul>
-<p><span class="caption-text">Components Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Components Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">API Reference</a></li>
 </ul>
-<p><span class="caption-text">Build models and blocks programatically</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../factory/index.html">Factory</a></li>
-</ul>
-<p><span class="caption-text">Tutorials and examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
 </ul>
-<p><span class="caption-text">Some custom parts</span></p>
+<p class="caption" role="heading"><span class="caption-text">Some custom parts</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../custom_parts/index.html">Custom parts reference</a></li>
 </ul>
@@ -247,7 +243,7 @@
 
 
 <div class="viewcode-block" id="build_positional_embedding"><a class="viewcode-back" href="../../../components/position_embedding.html#xformers.components.positional_embedding.build_positional_embedding">[docs]</a><span class="k">def</span> <span class="nf">build_positional_embedding</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">PositionEmbeddingConfig</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Builds a position encoding from a config.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds a position encoding from a config.</span>
 
 <span class="sd">    This assumes a &#39;name&#39; key in the config which is used to determine what</span>
 <span class="sd">    attention class to instantiate. For instance, a config `{&quot;name&quot;: &quot;my_position_encoding&quot;,</span>
@@ -294,10 +290,12 @@
 <span class="p">)</span>
 
 
-<span class="kn">from</span> <span class="nn">.sine</span> <span class="kn">import</span> <span class="n">SinePositionalEmbedding</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.rotary</span> <span class="kn">import</span> <span class="n">RotaryEmbedding</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.sine</span> <span class="kn">import</span> <span class="n">SinePositionalEmbedding</span>  <span class="c1"># type: ignore  # noqa</span>
 <span class="kn">from</span> <span class="nn">.vocab</span> <span class="kn">import</span> <span class="n">VocabEmbedding</span>  <span class="c1"># noqa</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;RotaryEmbedding&quot;</span><span class="p">,</span>
     <span class="s2">&quot;SinePositionalEmbedding&quot;</span><span class="p">,</span>
     <span class="s2">&quot;VocabEmbedding&quot;</span><span class="p">,</span>
     <span class="s2">&quot;build_positional_embedding&quot;</span><span class="p">,</span>
@@ -324,7 +322,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Facebook AI Research.
+        &copy; Copyright Copyright © 2021 Meta Platforms, Inc.
 
     </p>
   </div>
@@ -357,10 +355,11 @@
   
   <script type="text/javascript" id="documentation_options" data-url_root="../../../"
     src="../../../_static/documentation_options.js"></script>
+  <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
   <script src="../../../_static/jquery.js"></script>
   <script src="../../../_static/underscore.js"></script>
+  <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
   <script src="../../../_static/doctools.js"></script>
-  <script src="../../../_static/language_data.js"></script>
   
 
   
@@ -398,6 +397,8 @@
             <li class="list-title"><a href="">Resources</a></li>
             <li><a href="https://github.com/facebookresearch/xformers">Docs</a></li>
             <li><a href="https://github.com/facebookresearch/xformers/issues" target="_blank">Github Issues</a></li>
+            <li><a href="https://opensource.facebook.com/legal/terms">Terms of Use</a></li>
+            <li><a href="https://opensource.facebook.com/legal/privacy">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
